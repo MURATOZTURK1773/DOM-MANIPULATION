@@ -8,6 +8,7 @@
   <div class="item">Item Three</div>
 </div>
 ```
+lemmnn
 
 The most often used methods to retrieve the item/items from the DOM are the getElementById(), querySelector(), querySelectorAll()
 
