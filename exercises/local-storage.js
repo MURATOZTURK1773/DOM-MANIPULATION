@@ -38,3 +38,87 @@
  */
 
 // Your code goes here...
+
+const container = document.querySelector('.cardsContainer');
+
+function setFavoriteBackground(id) {
+  const item = document.getElementById(id);
+  if (item) {
+    item.style.backgroundColor = 'red';
+  }
+}
+
+function removeFavoriteBackground(id) {
+  const item = document.getElementById(id);
+  if (item) {
+    item.style.backgroundColor = '';
+  }
+}
+
+function addToFavorites(id) {
+  let favorites = localStorage.getItem('favorites');
+  if (!favorites) {
+    favorites = '[]'; 
+  } else {
+    favorites = JSON.parse(favorites);
+  }
+
+  if (!favorites.includes(id)) {
+    favorites.push(id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+}
+
+function removeFromFavorites(id) {
+  let favorites = localStorage.getItem('favorites');
+  if (!favorites) {
+    return;
+  } else {
+    favorites = JSON.parse(favorites);
+  }
+
+  const index = favorites.indexOf(id);
+  if (index !== -1) {
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+}
+
+function updateItem(id) {
+  const item = document.getElementById(id);
+  if (item) {
+    const favorites = localStorage.getItem('favorites');
+    if (favorites) {
+      const parsedFavorites = JSON.parse(favorites);
+      if (parsedFavorites.includes(id)) {
+        item.style.backgroundColor = 'red';
+      } else {
+        item.style.backgroundColor = '';
+      }
+    }
+  }
+} 
+
+container.addEventListener('click', function (e) {
+  const target = e.target;
+  if (target.classList.contains('card')) {
+    const id = target.id;
+    const favorites = localStorage.getItem('favorites');
+    
+    if (!favorites || !JSON.parse(favorites).includes(id)) {
+      setFavoriteBackground(id);
+      addToFavorites(id);
+    } else {
+      removeFavoriteBackground(id);
+      removeFromFavorites(id);
+    }
+  }
+});
+
+const favorites = localStorage.getItem('favorites');
+if (favorites) {
+  const parsedFavorites = JSON.parse(favorites);
+  parsedFavorites.forEach((id) => {
+    setFavoriteBackground(id);
+  });
+}
