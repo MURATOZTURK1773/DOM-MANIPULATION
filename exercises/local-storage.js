@@ -57,11 +57,7 @@ function removeFavoriteBackground(id) {
 
 function addToFavorites(id) {
   let favorites = localStorage.getItem('favorites');
-  if (!favorites) {
-    favorites = '[]'; 
-  } else {
-    favorites = JSON.parse(favorites);
-  }
+  favorites = favorites ? JSON.parse(favorites) : [];
 
   if (!favorites.includes(id)) {
     favorites.push(id);
@@ -71,11 +67,7 @@ function addToFavorites(id) {
 
 function removeFromFavorites(id) {
   let favorites = localStorage.getItem('favorites');
-  if (!favorites) {
-    return;
-  } else {
-    favorites = JSON.parse(favorites);
-  }
+  favorites = favorites ? JSON.parse(favorites) :  []; 
 
   const index = favorites.indexOf(id);
   if (index !== -1) {
