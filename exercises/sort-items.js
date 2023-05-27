@@ -47,15 +47,9 @@ function sortData(direction) {
     const idA = a.id.toUpperCase();
     const idB = b.id.toUpperCase();
 
-    if (direction === 'asc') {
-      if (idA < idB) return -1;
-      if (idA > idB) return 1;
-    } else if (direction === 'desc') {
-      if (idA > idB) return -1;
-      if (idA < idB) return 1;
-    }
+    const comparison = direction === 'asc' ? idA.localeCompare(idB) : idB.localeCompare(idA);
 
-    return 0;
+    return comparison;
   });
 
   items.forEach(function(item) {

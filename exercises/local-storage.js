@@ -76,20 +76,28 @@ function removeFromFavorites(id) {
   }
 }
 
+// function updateItem(id) {
+//   const item = document.getElementById(id);
+//   if (item) {
+//     const favorites = localStorage.getItem('favorites');
+//     if (favorites) {
+//       const parsedFavorites = JSON.parse(favorites);
+//       if (parsedFavorites.includes(id)) {
+//         item.style.backgroundColor = 'red';
+//       } else {
+//         item.style.backgroundColor = '';
+//       }
+//     }
+//   }
+// } 
+
 function updateItem(id) {
   const item = document.getElementById(id);
   if (item) {
-    const favorites = localStorage.getItem('favorites');
-    if (favorites) {
-      const parsedFavorites = JSON.parse(favorites);
-      if (parsedFavorites.includes(id)) {
-        item.style.backgroundColor = 'red';
-      } else {
-        item.style.backgroundColor = '';
-      }
-    }
-  }
-} 
+    const favorites = JSON.parse(localStorage.getItem('favorites') || [] );
+    item.style.backgroundColor = favorites.includes(id) ? 'red' : '';
+  } 
+}
 
 container.addEventListener('click', function (e) {
   const target = e.target;
